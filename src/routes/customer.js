@@ -3,7 +3,7 @@
 const express = require('express');
 
 const router = express.Router();
-const { customerModel } = require('./models');
+const { customerModel } = require('../models');
 
 app.get('/customer', async (req, res, next) => {
   let customers = await customerModel.findAll();
