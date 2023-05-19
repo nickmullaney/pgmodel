@@ -3,6 +3,7 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const customer = require('./customer');
 const order = require('./order');
+const Collection = require('./collection');
 
 
 // will make dynamic for testing environment
@@ -16,8 +17,12 @@ const customerModel = customer(SequelizeDatabase, DataTypes);
 
 const orderModel = order(SequelizeDatabase, DataTypes); 
 
+//create associations
+customerModel.hasMany(orderModel);
+orderModel.belongsTo(customerModel);
+
 module.exports = {
 SequelizeDatabase,
 customerModel,
-orderModel,
+order: new Collection(orderModel),
 };
